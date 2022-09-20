@@ -14,6 +14,7 @@ def teardown_appcontext(exception):
     """Inicialization teardown_appcontext"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(error):
     """ json 404 page """
