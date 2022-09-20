@@ -67,6 +67,17 @@ test_file_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
+    def test_count(self):
+        """ Test for the count of filestorage """
+        zero = models.storage.count("Bug")
+        typeof = models.storage.count(State)
+        state1 = State(name="Peru")
+        models.storage.new(state1)
+        models.storage.save()
+        self.assertEqual(zero, 0)
+        self.assertEqual(type(typeof), int)
+        self.assertNotEqual(typeof, models.storage.count(state1))
+
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
@@ -112,4 +123,4 @@ class TestFileStorage(unittest.TestCase):
         string = json.dumps(new_dict)
         with open("file.json", "r") as f:
             js = f.read()
-        self.assertEqual(json.loads(string), json.loads(js))
+            self.assertEqual(json.loads(string), json.loads(js))
